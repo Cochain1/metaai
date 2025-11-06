@@ -1,0 +1,26 @@
+roles:
+  - name: student1
+    system_prompt: ../prompts/star/student_sys.txt
+    user_prompt:   ../prompts/star/student_user1.txt
+    temperature: 0.3
+    max_tokens: 512
+  - name: teacher
+    system_prompt: ../prompts/star/teacher_sys.txt
+    user_prompt:   ../prompts/star/teacher_user.txt
+    temperature: 0.2
+    max_tokens: 384
+  - name: student2
+    system_prompt: ../prompts/star/student_sys.txt
+    user_prompt:   ../prompts/star/student_user2.txt
+    temperature: 0.2
+    max_tokens: 512
+
+rounds: 2
+
+edges:
+  - {from: student1, to: teacher, mode: critique}
+  - {from: teacher, to: student2, mode: feedback}
+
+aggregate:
+  type: last_judge
+  judge: student2

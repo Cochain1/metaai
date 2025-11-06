@@ -1,0 +1,100 @@
+# metagen-ai/configs/default.yaml
+# Central config for MetaGen-AI. All comments are in English.
+
+llm:
+  provider: "vllm"                     # OpenAI-compatible endpoint
+  model: "deepseek-chat"               # 或 "deepseek-reasoner"
+  api_key_env: "DEEPSEEK_API_KEY"
+  #api_key_env: ""
+  base_url: "https://api.deepseek.com" # 也可以用 https://api.deepseek.com/v1
+  temperature: 0.1
+  max_tokens: 512
+  context_window: 32768
+  timeout_s: 60
+  max_retries: 3
+  backoff_s: 1.2
+
+
+runtime:
+  cache_dir: "data/cache"
+  log_dir: "logs"
+  seed: 42
+
+controller:
+  # MoE-style gating with cost-awareness
+  gating: "moe"
+  threshold: 0.8        # cumulative-score fraction for selecting nodes
+  early_exit: true
+  max_layers: 4
+  cost_weight: 0.3      # lambda for token/call cost penalty in cost-aware gating
+  use_sbert: true       # try sentence-transformers; code falls back only if you turn this off
+
+pruning:
+  enable: true
+  strategy: "similarity"   # "similarity" | "degree" | "random"
+  warmup_rounds: 2
+  prune_ratio: 0.2
+  low_rank: true
+
+role_space:
+  # Generative Role Space
+  diversity_reward: 0.3
+  adapter: "lora"
+  max_new_roles: 3
+  min_semantic_distance: 0.25
+  train_steps: 200
+  # Optional knobs used by generators if available:
+  propose_temperature: 0.4
+
+feedback:
+  # Textual-gradient channels
+  textual_gradient: true
+  channels: ["prompt", "temperature", "topology"]
+  temp_step: 0.1
+  temp_min: 0.0
+  temp_max: 1.0
+  reinforce_edge_on_success: true
+  weaken_edge_on_failure: true
+
+eval:
+  datasets: ["gsm8k_tiny", "arith_grid"]
+  metrics: ["accuracy", "tokens", "calls"]
+  max_examples: 64
+
+architect:
+  # Task-adaptive graph constructor (G-Designer style)
+  g_designer:
+    max_nodes: 6
+    k_top: 2
+    sparsity: 0.5
+    use_vgae: false    # set true only if torch-geometric is installed properly
+    vgae_hidden: 16
+    vgae_epochs: 80
+    vgae_lr: 0.01
+
+paths:
+  role_stats_path: logs/role_stats.json
+
+training:
+  # Self-evolving loop defaults
+  steps: 200
+  prune_every: 5
+  save_every: 50
+  log_file: "train_self_evolve.jsonl"
+
+logging:
+  level: "INFO"
+  pretty: true
+
+embeddings:
+  sbert_path: "/home/zhaojiaxing/metagen-ai/models/all-MiniLM-L6-v2"   # ← 你的本地目录
+  local_only: true                        # 可选：强制只用本地
+
+role_gen:
+  enable: true      # ← 开启“AI 生成角色”
+  num_new: 2
+  diversity_weight: 0.3
+  diversity: true
+
+evolve:
+  enable: true      # ←（脚本里通过 --no_feedback 控制，也可做双保险）

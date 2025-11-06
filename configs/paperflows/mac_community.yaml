@@ -1,0 +1,26 @@
+roles:
+  - name: debater_a
+    system_prompt: ../prompts/mac/debater_sys.txt
+    user_prompt:   ../prompts/mac/debater_user.txt
+    temperature: 0.7
+    max_tokens: 512
+  - name: debater_b
+    system_prompt: ../prompts/mac/debater_sys.txt
+    user_prompt:   ../prompts/mac/debater_user.txt
+    temperature: 0.7
+    max_tokens: 512
+  - name: judge
+    system_prompt: ../prompts/mac/judge_sys.txt
+    user_prompt:   ../prompts/mac/judge_user.txt
+    temperature: 0.0
+    max_tokens: 256
+
+rounds: 2
+
+edges:
+  - {from: debater_a, to: debater_b, mode: critique}
+  - {from: debater_b, to: debater_a, mode: critique}
+
+aggregate:
+  type: judge
+  judge: judge

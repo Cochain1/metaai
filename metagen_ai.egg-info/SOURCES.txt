@@ -1,0 +1,7 @@
+pyproject.toml
+metagen_ai.egg-info/PKG-INFO
+metagen_ai.egg-info/SOURCES.txt
+metagen_ai.egg-info/dependency_links.txt
+metagen_ai.egg-info/requires.txt
+metagen_ai.egg-info/top_level.txt
+src/metagen_ai/__init__.py

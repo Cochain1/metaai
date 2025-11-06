@@ -1,0 +1,2 @@
+mode,dataset,seed,accuracy,avg_tokens,avg_latency_s,count,rounds,no_prune,no_feedback
+hybrid,gsm8k_500,0,0.085,177.37,4.58569807767868,200,1,0,0

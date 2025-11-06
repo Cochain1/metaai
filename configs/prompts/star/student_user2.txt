@@ -1,0 +1,8 @@
+Problem:
+{question}
+
+Teacher feedback:
+{context}
+
+Rewrite a clean, corrected solution and end with exactly one line:
+Final answer: <number>

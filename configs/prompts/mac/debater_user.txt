@@ -1,0 +1,5 @@
+Problem:
+{question}
+
+If any previous reasoning is shown below, briefly critique it and then produce your improved solution.
+{context}

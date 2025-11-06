@@ -1,0 +1,2 @@
+mode,dataset,seed,accuracy,avg_tokens,avg_latency_s,count,rounds,no_prune,no_feedback
+pure-llm,humaneval,0,1.0,2909.2256097560976,23.60897182836765,164,2,1,1

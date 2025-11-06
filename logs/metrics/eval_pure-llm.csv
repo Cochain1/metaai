@@ -1,0 +1,2 @@
+mode,dataset,seed,accuracy,avg_tokens,avg_latency_s,count,rounds,no_prune,no_feedback
+pure-llm,gsm8k_test,0,0.735,1906.58,77.2442454111576,200,2,0,0

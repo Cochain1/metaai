@@ -1,0 +1,2 @@
+baseline,dataset,seed,accuracy,avg_tokens,avg_latency_s,count,max_tokens,temperature
+selfcons,gsm8k_test,0,0.9385898407884761,2881.174374526156,69.43075471090674,1319,512,0.7

@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "metagen-ai"
+version = "0.1.0"
+description = "MetaGen-AI: Self-Evolving Generative Framework for Multi-Agent LLMs"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "PyYAML>=6.0.1",
+  "networkx>=3.3",
+  "sentence-transformers>=3.0.1",
+  "transformers>=4.45.2",
+  "accelerate>=1.0.1",
+  "datasets>=3.0.1",
+  "einops>=0.8.0",
+  "evaluate>=0.4.2",
+  "tqdm>=4.66.5",
+  "pydantic>=2.8.2",
+  "requests>=2.32.3",
+  "uvloop>=0.20.0",
+  "matplotlib>=3.9.2",
+  "openai>=1.40.0",
+  "peft>=0.13.2",
+  "torch>=2.4.0",
+]
+authors = [{ name = "MetaGen-AI" }]
+
+[tool.setuptools]
+packages = ["metagen_ai"]
+package-dir = { "metagen_ai" = "src/metagen_ai" }
+include-package-data = true
